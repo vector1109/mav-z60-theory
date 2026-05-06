@@ -1,329 +1,254 @@
-# Multiplicative Dynamics over Finite Residue Rings
+# Multiplicative Power Dynamics on Finite Residue Rings
 
-## A Theory Note on Idempotent Collapse, Functional Digraphs, and Arithmetic Classification
+## A Structural Classification of the Maps $x \mapsto x^k \bmod n$
 
 ---
 
 ## Abstract
 
-This note develops a unified theory of multiplicative dynamical systems over finite residue rings of the form
+We study the finite dynamical systems induced by multiplicative power maps
 
-[
-f_k(x)=x^k \bmod n.
-]
+$$
+f_k(x)=x^k \bmod n
+$$
 
-Although the algebraic structure of (\mathbb{Z}_n) is classical, its interpretation as a finite deterministic dynamical system admits a systematic structural classification not usually presented in standard algebraic treatments.
+over residue rings $\mathbb{Z}_n$.
 
-The framework developed here shows that these systems are completely determined by three arithmetic ingredients:
+These maps induce finite functional digraphs whose topology is fully determined by arithmetic structure. We show that the global dynamics decomposes canonically through the Chinese Remainder Theorem, that the idempotent set defines a fixed attractor skeleton depending only on the prime decomposition of $n$, and that the transient and cyclic structure is completely classified by local primary dynamics together with the arithmetic relation between $k$ and the Carmichael exponent $\lambda(n)$.
 
-1. the prime decomposition of (n),
-2. the local dynamics on each primary component (\mathbb{Z}_{p^\alpha}),
-3. the arithmetic relation between (k) and the Carmichael exponent (\lambda(n)).
+The system over $\mathbb{Z}_{60}$ under squaring is presented as the canonical fully dissipative model. In that case, the graph decomposes into eight rooted components, each converging to one idempotent in bounded depth and with no nontrivial cycles.
 
-This induces a complete classification of the associated functional digraphs, including:
-
-* idempotent attractor structure,
-* transient collapse geometry,
-* cyclic behavior in the unit sector,
-* and global graph topology.
-
-The case ((n,k)=(60,2)) is developed as the canonical fully dissipative example.
+This yields a complete structural classification of multiplicative power dynamics on finite residue rings and establishes the induced functional graph as the canonical geometric object underlying the system.
 
 ---
 
-## 1. Motivation
+## 1. Introduction
 
-Finite residue rings are standard objects in algebra and number theory.
-Their multiplicative structure is well understood in static terms:
+Finite residue rings support a natural class of deterministic multiplicative dynamical systems obtained by iterating modular power maps. Given integers $n \ge 2$ and $k \ge 2$, one defines
 
-* ring decomposition,
-* unit groups,
-* idempotents,
-* nilpotents,
-* Chinese remainder structure.
+$$
+f_k(x)=x^k \bmod n.
+$$
 
-What is less commonly made explicit is that every multiplicative power map
+This induces a discrete-time dynamical system over the finite state space $\mathbb{Z}_n$.
 
-[
-x \mapsto x^k \bmod n
-]
+Despite its elementary definition, the induced dynamics is highly structured. Every orbit is finite, every trajectory is eventually periodic, and the global system admits a canonical decomposition into directed components determined entirely by arithmetic data.
 
-defines a deterministic discrete dynamical system over a finite state space.
+The central claim of this work is that multiplicative power dynamics over finite residue rings is not merely computable, but structurally classifiable.
 
-This simple observation shifts the perspective from static algebra to finite dynamics.
+The case $\mathbb{Z}_{60}$ under squaring provides the canonical dissipative model: all trajectories collapse in bounded depth, all attractors are idempotent, and the induced graph is a finite rooted forest with no nontrivial cycles. This example motivates the general theory.
 
-The central question is no longer merely:
-
-> What is the multiplicative structure of (\mathbb{Z}_n)?
-
-but rather:
-
-> What is the global dynamical topology induced by iterating multiplication?
-
-This note addresses that question.
+The purpose of this note is to formalize the system, define its canonical graph object, classify its attractor structure, and extend the resulting framework from squaring dynamics to the full family of multiplicative power maps.
 
 ---
 
-## 2. Foundational Principle
+## 2. Axiomatic Foundation
 
-Let
+The fundamental object is the residue ring $\mathbb{Z}_n$ endowed with multiplicative power dynamics
 
-[
+$$
 f_k(x)=x^k \bmod n.
-]
+$$
 
-Since (\mathbb{Z}_n) is finite, iteration of (f_k) produces a finite deterministic orbit for every initial state.
+For each integer $n \ge 2$, define
 
-Thus every such system induces a finite functional digraph
+$$
+\mathbb{Z}_n = \{0,1,\dots,n-1\}.
+$$
 
-[
-\mathcal{G}_{n,k}=(V,E),\qquad
+The map $f_k : \mathbb{Z}_n \to \mathbb{Z}_n$ is well-defined for all $k \ge 1$, and its iterates generate finite orbits
+
+$$
+\mathcal{O}_k(x)=\{x,f_k(x),f_k^2(x),\dots\}.
+$$
+
+Since $\mathbb{Z}_n$ is finite, every orbit is eventually periodic.
+
+This induces a canonical functional digraph
+
+$$
+\mathcal{G}_{n,k}=(V,E),
+\qquad
 V=\mathbb{Z}_n,\quad
-E={(x,f_k(x))}.
-]
+E=\{(x,f_k(x)) : x\in\mathbb{Z}_n\}.
+$$
 
-Each node has out-degree exactly one.
+Each vertex has out-degree exactly one, so $\mathcal{G}_{n,k}$ is a finite functional digraph.
 
-Therefore every multiplicative power map over (\mathbb{Z}_n) is equivalent to a finite directed graph composed of:
+The structural attractors of the system are governed by the idempotents of $\mathbb{Z}_n$:
 
-* rooted trees,
-* directed cycles,
-* and trees feeding cycles.
+$$
+E_n=\{e\in\mathbb{Z}_n : e^2=e\}.
+$$
 
-The entire theory reduces to classifying this graph.
+These define the canonical attractor skeleton of the system.
 
 ---
 
-## 3. Structural Axiom (CRT Decoupling)
+## 3. Canonical Dissipative Model: $\mathbb{Z}_{60}$
 
-Let
+The canonical dissipative example is the squaring map
 
-[
-n=\prod_{i=1}^{r}p_i^{\alpha_i}.
-]
+$$
+f(x)=x^2 \bmod 60.
+$$
 
 By the Chinese Remainder Theorem,
 
-[
-\mathbb{Z}*n \cong \prod*{i=1}^{r}\mathbb{Z}_{p_i^{\alpha_i}}.
-]
+$$
+\mathbb{Z}_{60}\cong \mathbb{Z}_4\times\mathbb{Z}_3\times\mathbb{Z}_5.
+$$
 
-Under this decomposition, the map (f_k) acts componentwise:
+This yields a complete componentwise decomposition of the dynamics.
 
-[
-f_k(x_1,\dots,x_r)=(x_1^k,\dots,x_r^k).
-]
+The idempotents of $\mathbb{Z}_{60}$ are exactly
 
-This yields the foundational axiom of the theory:
+$$
+E_{60}=\{0,1,16,21,25,36,40,45\}.
+$$
 
-> **Axiom (CRT Decoupling).**
-> Every multiplicative dynamical system over (\mathbb{Z}*n) decomposes into independent local dynamical systems over the primary components (\mathbb{Z}*{p_i^{\alpha_i}}).
+Thus the system has eight attractor roots.
 
-Thus all global behavior is assembled from local arithmetic dynamics.
+Every orbit converges to one of these idempotents, no nontrivial cycles occur, and the induced graph is a finite rooted forest of depth at most two.
 
----
-
-## 4. Idempotent Skeleton
-
-An element (e\in\mathbb{Z}_n) is idempotent if
-
-[
-e^2\equiv e\pmod n.
-]
-
-The set of idempotents (E_n) forms the attractor skeleton of the system.
-
-Since each primary component has exactly two idempotents ((0) and (1)), CRT implies:
-
-[
-|E_n|=2^r.
-]
-
-These idempotents are structural invariants:
-
-* they depend only on (n),
-* they do not depend on (k),
-* they define the global attractor partition of the graph.
-
-Thus every multiplicative dynamical graph over (\mathbb{Z}_n) is organized around a fixed idempotent skeleton.
+This makes $(\mathbb{Z}_{60},x\mapsto x^2)$ the canonical fully dissipative multiplicative dynamical system.
 
 ---
 
-## 5. Unit-Sector Dynamics
+## 4. Global $\Phi$ Classification on $\mathbb{Z}_n$
 
-The group of units (U(n)) forms the conservative core of the system.
+Let
 
-Restricted to (U(n)), the map becomes
+$$
+n=\prod_{i=1}^r p_i^{\alpha_i}.
+$$
 
-[
+By CRT,
+
+$$
+\mathbb{Z}_n\cong \prod_{i=1}^r \mathbb{Z}_{p_i^{\alpha_i}}.
+$$
+
+This decomposes the global dynamics componentwise.
+
+Each local component admits a binary structural projection onto $\{0,1\}$, distinguishing units from non-units. These local projections assemble canonically into a global projection
+
+$$
+\Phi_n:\mathbb{Z}_n\to E_n,
+$$
+
+which maps each element to its structural idempotent class.
+
+The map $\Phi_n$ is invariant under dynamics,
+
+$$
+\Phi_n(f_k(x))=\Phi_n(x),
+$$
+
+and induces a canonical partition
+
+$$
+\mathbb{Z}_n=\bigsqcup_{e\in E_n}\Phi_n^{-1}(e).
+$$
+
+Thus the full system decomposes into structural attraction fibers indexed by idempotents.
+
+---
+
+## 5. Functional Graph Representation
+
+The induced graph $\mathcal{G}_{n,k}$ is the canonical geometric realization of the system.
+
+Every connected component of $\mathcal{G}_{n,k}$ consists of:
+
+- one directed cycle,
+- with finite rooted trees feeding into it.
+
+Thus $\mathcal{G}_{n,k}$ is a finite functional graph in the classical sense.
+
+Its topology decomposes into three structural node classes:
+
+- idempotent nodes (fixed points),
+- transient nodes,
+- periodic nodes.
+
+The graph therefore represents the complete deterministic flow structure of multiplicative dynamics over $\mathbb{Z}_n$.
+
+---
+
+## 6. General Multiplicative Power Dynamics
+
+We now consider the full family
+
+$$
+f_k(x)=x^k \bmod n.
+$$
+
+The set of idempotents depends only on $n$, not on $k$, and therefore defines a structural invariant across the entire family.
+
+What changes with $k$ is the geometry of trajectories.
+
+The unit group $U(n)$ governs the cyclic sector of the graph. Restricted to units, $f_k$ acts by exponentiation:
+
+$$
 u\mapsto u^k.
-]
+$$
 
-Its behavior is governed by the Carmichael exponent (\lambda(n)).
+Its behavior is controlled by the Carmichael exponent $\lambda(n)$.
 
-### Theorem (Permutation Criterion)
+### Theorem 6.1 (Permutation Criterion)
 
-The restriction of (f_k) to (U(n)) is bijective if and only if
+The restriction of $f_k$ to $U(n)$ is a permutation if and only if
 
-[
+$$
 \gcd(k,\lambda(n))=1.
-]
+$$
 
-This separates two regimes:
+Thus the global graph exhibits three regimes:
 
-* **conservative unit dynamics** (permutational),
-* **dissipative unit dynamics** (collapsing).
+- **Permutational:** cyclic unit dynamics,
+- **Dissipative:** collapsing unit dynamics,
+- **Mixed:** coexistence of cyclic and collapsing sectors.
 
-This criterion controls all nontrivial cycle formation.
-
----
-
-## 6. Global Topological Regimes
-
-Every graph (\mathcal{G}_{n,k}) belongs to one of three regimes.
-
-### 6.1 Permutational Regime
-
-If
-
-[
-\gcd(k,\lambda(n))=1,
-]
-
-then the unit sector is purely cyclic.
-
-Units lie on cycles and do not collapse.
+This yields a complete arithmetic classification of the topology of $\mathcal{G}_{n,k}$.
 
 ---
 
-### 6.2 Dissipative Regime
+## 7. Computational Realization (MAV Layer)
 
-If
+The theory defines the mathematical object.
 
-[
-\gcd(k,\lambda(n))>1,
-]
+MAV defines its computational realization.
 
-then the unit sector is non-invertible.
+Within the repository, the theoretical object is specified in `Theory/`, the arithmetic engine is implemented in `Core/`, and MAV acts as the execution and validation layer that instantiates the dynamical system computationally.
 
-Distinct trajectories merge and collapse toward attractors.
+Thus MAV is not the theory itself.
 
----
+MAV is the operational layer that computes, renders, exports, and empirically validates the formal object defined by the theory.
 
-### 6.3 Mixed Regime
-
-In general, the global graph contains both:
-
-* cyclic components,
-* collapsing components.
-
-Thus most systems are mixed.
+This separates mathematical structure from computational execution.
 
 ---
 
-## 7. Canonical Example: (\mathbb{Z}_{60}) under Squaring
+## 8. Open Directions
 
-The system
+The present framework admits several natural extensions:
 
-[
-x\mapsto x^2 \bmod 60
-]
+1. spectral theory of finite functional graphs $\mathcal{G}_{n,k}$,
+2. categorical functoriality under CRT decomposition,
+3. entropy and complexity measures for finite multiplicative systems,
+4. computational applications of arithmetic dynamical graphs.
 
-provides the canonical fully resolved dissipative example.
-
-Its structure is:
-
-* (60=2^2\cdot3\cdot5),
-* (r=3),
-* (2^r=8) idempotents,
-* (\lambda(60)=4),
-* (\gcd(2,4)=2>1).
-
-Therefore the system is dissipative.
-
-Its graph consists of:
-
-* 60 nodes,
-* 8 connected components,
-* 8 idempotent roots,
-* finite-depth directed trees,
-* no nontrivial cycles.
-
-This gives a complete explicit model of dissipative multiplicative collapse.
+These define the natural continuation of the present theory.
 
 ---
 
-## 8. General Classification Theorem
+## 9. Conclusion
 
-### Theorem
+Multiplicative power maps over finite residue rings define a fully structured class of finite dynamical systems.
 
-The functional digraph induced by
+Their dynamics is finite, deterministic, arithmetic, and globally classifiable.
 
-[
-f_k(x)=x^k \bmod n
-]
+The induced functional graph is the canonical geometric object of the system, and its topology is determined entirely by arithmetic structure.
 
-is completely determined by:
-
-1. the prime decomposition of (n),
-2. the local primary dynamics over each (\mathbb{Z}_{p^\alpha}),
-3. the arithmetic relation between (k) and (\lambda(n)).
-
-Hence the topology of multiplicative dynamics over (\mathbb{Z}_n) is fully classifiable from arithmetic data alone.
-
----
-
-## 9. Role of MAV
-
-MAV is not the source of the theory.
-
-MAV is its executable layer.
-
-Its role is:
-
-* instantiate arithmetic states,
-* execute the induced transition system,
-* render the functional digraph experimentally,
-* validate the predicted collapse structure.
-
-Thus MAV is not the mathematical object itself.
-
-It is the computational instrument that makes the object observable.
-
----
-
-## 10. Scope and Boundary
-
-This work does not introduce new algebraic structures.
-
-Its contribution is organizational.
-
-It reclassifies familiar arithmetic objects as explicitly structured finite dynamical systems and provides a unified graph-theoretic description of their behavior.
-
-The novelty lies not in new algebra, but in explicit dynamical cartography.
-
----
-
-## 11. Open Direction
-
-The natural continuation of this work is not algebraic invention, but structural expansion.
-
-Three directions remain open:
-
-1. categorical functoriality of (n\mapsto\mathcal{G}_{n,k}),
-2. spectral theory of multiplicative functional digraphs,
-3. explicit classification of graph families induced by varying (k).
-
-These define the open boundary of the framework.
-
----
-
-## Conclusion
-
-Multiplicative power maps over finite residue rings define a fully classifiable family of finite deterministic dynamical systems.
-
-Their graphs are arithmetic in origin, finite in structure, and globally constrained by number-theoretic invariants.
-
-They are not chaotic objects.
-
-They are algebraic dynamical machines.
+This establishes multiplicative power dynamics on $\mathbb{Z}_n$ as a complete and structurally classifiable arithmetic dynamical theory.
