@@ -1,0 +1,20 @@
+Licensing Structure Notice
+==========================
+
+This repository is licensed in layers.
+
+1. Computational Stack
+   - Includes: Core/, Z60/, Observers/, Experiments/, Data/Export/
+   - License: Mozilla Public License 2.0 (MPL-2.0)
+
+2. Theory and Formal Documentation
+   - Includes: Theory/
+   - License: Creative Commons Attribution 4.0 (CC BY 4.0)
+
+This separation is intentional.
+
+The computational stack is licensed as reusable source code with protected
+file-level reciprocity.
+
+The theoretical framework is licensed as open formal documentation with
+attribution requirements.
