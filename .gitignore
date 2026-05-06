@@ -1,0 +1,31 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# PowerShell
+*.ps1xml
+*.clixml
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Local exports / temp
+Data/temp/
+Data/tmp/
+*.bak
+*.tmp
+
+# Notebook / cache
+.ipynb_checkpoints/
+
+# Build / generated
+dist/
+build/
