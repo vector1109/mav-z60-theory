@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+title: "Multiplicative Power Dynamics on Finite Residue Rings"
+message: "If you use this repository in research, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: "Farias"
+    given-names: "Fabian Dario"
+repository-code: "https://github.com/vector1109/mav-z60-theory"
+license: "MPL-2.0"
+version: "1.0.0"
+date-released: 2026-05-06
+abstract: >
+  Formal and computational framework for multiplicative power dynamics
+  over finite residue rings, including axiomatic theory, functional graph
+  classification, CRT decomposition, and executable MAV validation.
+keywords:
+  - finite dynamical systems
+  - modular arithmetic
+  - residue rings
+  - functional graphs
+  - CRT
+  - idempotents
+  - power maps
