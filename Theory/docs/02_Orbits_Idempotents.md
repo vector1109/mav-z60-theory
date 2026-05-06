@@ -1,4 +1,4 @@
-# 📊 DOCUMENTO 2 — ÓRBITAS E IDEMPOTENTES EN \(\mathbb{Z}_{60}\)
+# 📊 DOCUMENTO 2 — ÓRBITAS E IDEMPOTENTES EN $\mathbb{Z}_{60}$
 
 ## Versión 1.0
 
@@ -8,11 +8,11 @@
 
 Este documento clasifica completamente la dinámica del sistema:
 
-\[
+$$
 f(x) = x^2 \bmod 60
-\]
+$$
 
-sobre \(\mathbb{Z}_{60}\), describiendo:
+sobre $\mathbb{Z}_{60}$, describiendo:
 
 - idempotentes
 - cuencas de atracción
@@ -25,27 +25,27 @@ sobre \(\mathbb{Z}_{60}\), describiendo:
 
 Se utiliza la descomposición:
 
-\[
+$$
 \mathbb{Z}_{60} \cong \mathbb{Z}_4 \times \mathbb{Z}_3 \times \mathbb{Z}_5
-\]
+$$
 
 por el Teorema Chino del Resto.
 
 La dinámica se desacopla como:
 
-\[
+$$
 f(x) \leftrightarrow (x_4^2, x_3^2, x_5^2)
-\]
+$$
 
 ---
 
-# 2. Idempotentes en \(\mathbb{Z}_{60}\)
+# 2. Idempotentes en $\mathbb{Z}_{60}$
 
 ## 2.1 Definición
 
-\[
+$$
 e^2 \equiv e \pmod{60}
-\]
+$$
 
 ---
 
@@ -53,9 +53,9 @@ e^2 \equiv e \pmod{60}
 
 Los idempotentes son exactamente:
 
-\[
+$$
 E_{60} = \{0, 1, 16, 21, 25, 36, 40, 45\}
-\]
+$$
 
 ---
 
@@ -65,15 +65,15 @@ Cada idempotente corresponde a una combinación binaria:
 
 | Componente | Valor |
 |------------|------|
-| \(\mathbb{Z}_4\) | 0 o 1 |
-| \(\mathbb{Z}_3\) | 0 o 1 |
-| \(\mathbb{Z}_5\) | 0 o 1 |
+| $\mathbb{Z}_4$ | 0 o 1 |
+| $\mathbb{Z}_3$ | 0 o 1 |
+| $\mathbb{Z}_5$ | 0 o 1 |
 
 Total:
 
-\[
+$$
 |E_{60}| = 2^3 = 8
-\]
+$$
 
 ---
 
@@ -81,18 +81,18 @@ Total:
 
 ## 3.1 Propiedad fundamental
 
-Toda órbita es finita y converge a un idempotente:
+Toda órbita converge a un idempotente:
 
-\[
-\forall x \in \mathbb{Z}_{60}, \exists e \in E_{60} :
-\exists m \; f^m(x) = e
-\]
+$$
+\forall x \in \mathbb{Z}_{60}, \exists m \in \mathbb{N}, \exists e \in E_{60}
+\text{ tal que } f^m(x) = e
+$$
 
 ---
 
 ## 3.2 Ausencia de ciclos no triviales
 
-No existen ciclos de período > 1 en \(\mathbb{Z}_{60}\) bajo \(x^2\).
+No existen ciclos de período > 1 en $\mathbb{Z}_{60}$ bajo $x^2$.
 
 El sistema es **puramente disipativo**.
 
@@ -100,11 +100,11 @@ El sistema es **puramente disipativo**.
 
 # 4. Cuencas de atracción
 
-Cada idempotente \(e \in E_{60}\) define:
+Cada idempotente $e \in E_{60}$ define:
 
-\[
+$$
 B(e) = \{x \in \mathbb{Z}_{60} \mid \Phi(x) = e\}
-\]
+$$
 
 ---
 
@@ -123,35 +123,35 @@ B(e) = \{x \in \mathbb{Z}_{60} \mid \Phi(x) = e\}
 
 Verificación:
 
-\[
+$$
 \sum |B(e)| = 60
-\]
+$$
 
 ---
 
 # 5. Dinámica por componente
 
-## 5.1 En \(\mathbb{Z}_4\)
+## 5.1 En $\mathbb{Z}_4$
 
-\[
+$$
 0 \to 0,\quad 1 \to 1,\quad 2 \to 0,\quad 3 \to 1
-\]
+$$
 
 ---
 
-## 5.2 En \(\mathbb{Z}_3\)
+## 5.2 En $\mathbb{Z}_3$
 
-\[
+$$
 0 \to 0,\quad 1 \to 1,\quad 2 \to 1
-\]
+$$
 
 ---
 
-## 5.3 En \(\mathbb{Z}_5\)
+## 5.3 En $\mathbb{Z}_5$
 
-\[
+$$
 0 \to 0,\quad 1 \to 1,\quad 2 \to 4 \to 1,\quad 3 \to 4 \to 1,\quad 4 \to 1
-\]
+$$
 
 ---
 
@@ -161,9 +161,9 @@ Verificación:
 
 El sistema cumple:
 
-\[
+$$
 \max_{x \in \mathbb{Z}_{60}} \min \{t : f^t(x) \in E_{60}\} = 2
-\]
+$$
 
 ---
 
@@ -177,7 +177,7 @@ El sistema cumple:
 
 # 7. Estructura del grafo dinámico
 
-\(\mathcal{G}_{60}\) es un bosque dirigido:
+$\mathcal{G}_{60}$ es un bosque dirigido:
 
 - 60 nodos
 - 8 raíces (idempotentes)
@@ -197,25 +197,27 @@ El sistema cumple:
 
 ---
 
-# 8. Función estructural Φ
+# 8. Función estructural $\Phi$
 
-## Definición operacional
+## Definición 1 (proyección dinámica en el caso disipativo)
 
-\[
+$$
 \Phi(x) = \lim_{t \to \infty} f^t(x)
-\]
+$$
+
+Esta definición es válida en $\mathbb{Z}_{60}$ bajo $f(x)=x^2$ porque toda órbita converge a un único punto fijo idempotente.
 
 ---
 
 ## Propiedades
 
-- invariante: \(\Phi(f(x)) = \Phi(x)\)
-- idempotente: \(\Phi(e) = e\)
+- invariante: $\Phi(f(x)) = \Phi(x)$
+- idempotente: $\Phi(e) = e$
 - partición del espacio
 
-\[
+$$
 \mathbb{Z}_{60} = \bigsqcup_{e \in E_{60}} B(e)
-\]
+$$
 
 ---
 
@@ -242,9 +244,7 @@ Es un:
 
 Este documento habilita:
 
-- generalización a \(\mathbb{Z}_n\)
-- estudio de \(x^k\)
+- generalización a $\mathbb{Z}_n$
+- estudio de $x^k$
 - análisis de profundidad estructural
-- comparación entre distintos \(n\)
-
----
+- comparación entre distintos $n$

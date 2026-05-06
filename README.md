@@ -1,4 +1,4 @@
-````markdown
+```markdown
 # MAV–Z60 Theory  
 ### Multiplicative Dynamics over Finite Residue Rings
 
@@ -14,9 +14,9 @@
 
 This repository formalizes and executes multiplicative dynamics over finite residue rings of the form
 
-\[
+$$
 f_k(x)=x^k \bmod n.
-\]
+$$
 
 Its purpose is to treat finite modular arithmetic not only as algebra, but as a deterministic dynamical system with explicit graph topology.
 
@@ -28,9 +28,9 @@ The repository combines:
 
 The canonical case developed here is:
 
-\[
+$$
 x \mapsto x^2 \bmod 60,
-\]
+$$
 
 used as the minimal fully resolved dissipative example.
 
@@ -46,15 +46,15 @@ They are fully determined by arithmetic structure.
 
 For
 
-\[
+$$
 f_k(x)=x^k \bmod n,
-\]
+$$
 
 the topology of the induced graph is completely determined by:
 
-1. the prime decomposition of \(n\),
-2. the local dynamics over each \(\mathbb{Z}_{p^\alpha}\),
-3. the arithmetic relation between \(k\) and \(\lambda(n)\).
+1. the prime decomposition of $n$,
+2. the local dynamics over each $\mathbb{Z}_{p^\alpha}$,
+3. the arithmetic relation between $k$ and $\lambda(n)$.
 
 This repository formalizes that claim and validates it computationally.
 
@@ -111,7 +111,7 @@ mav-z60-theory/
         ├── MAV_Core.ps1
         ├── MAV_Engine.ps1
         └── Observer_Log.ps1
-````
+```
 
 ---
 
@@ -125,7 +125,7 @@ It develops:
 * idempotent attractor classification,
 * orbit partitioning,
 * functional digraph topology,
-* generalized dynamics of (x \mapsto x^k).
+* generalized dynamics of $x \mapsto x^k$.
 
 The unified paper is available in:
 
@@ -188,9 +188,9 @@ Show-SeedComparison
 
 For the canonical system
 
-[
+$$
 x \mapsto x^2 \bmod 60,
-]
+$$
 
 the induced functional digraph is fully classified:
 
@@ -243,7 +243,7 @@ This repository closes a formal framework and leaves open three research directi
 
 1. categorical lift of multiplicative functional digraphs,
 2. spectral theory of arithmetic dynamical graphs,
-3. full topology classification under varying exponents (k).
+3. full topology classification under varying exponents ($k$).
 
 These define the open research boundary.
 
@@ -258,6 +258,33 @@ This repository uses a layered licensing model:
 
 * **Theory / Formal Documentation** (`Theory/`)
   Licensed under **CC BY 4.0**
+```
 
-```
-```
+## Cambios realizados:
+
+| Original | Corregido |
+|----------|-----------|
+| `\[ f_k(x)=... \]` | `$$ f_k(x)=... $$` |
+| `\(n\)` | `$n$` |
+| `\(\mathbb{Z}_{p^\alpha}\)` | `$\mathbb{Z}_{p^\alpha}$` |
+| `\(k\)` | `$k$` |
+| `\[ x \mapsto x^2 \bmod 60, \]` | `$$ x \mapsto x^2 \bmod 60, $$` |
+| `(x \mapsto x^k)` (sin delimitadores) | `$x \mapsto x^k$` |
+| `[ x \mapsto x^2 \bmod 60, ]` (corchetes simples) | `$$ x \mapsto x^2 \bmod 60, $$` |
+
+## Canonical Validation
+
+The repository includes a fully reproducible execution of the canonical
+$(n,k)=(60,2)$ system.
+
+Run:
+
+```powershell
+.\Validation\Run-CanonicalValidation.ps1
+
+This generates:
+
+structural orbit tables,
+idempotent basin classification,
+graph validation exports,
+reproducible validation artifacts in Validation/Figures/.
