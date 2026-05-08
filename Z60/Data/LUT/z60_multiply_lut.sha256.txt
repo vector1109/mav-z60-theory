@@ -1,0 +1,17 @@
+Z60 Canonical LUT SHA256
+========================
+
+File:
+z60_multiply_lut.bin
+
+SHA256:
+08C84D5D3F39C0DEEE48D44324EFFEF9CE9E1E413EFC9AB728AC0E0BD3D6BD11
+
+Entries:
+3600
+
+Ordering:
+row-major
+
+Runtime:
+Z60 Canonical Runtime v1.0.0
