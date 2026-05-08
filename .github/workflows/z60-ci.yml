@@ -1,0 +1,128 @@
+name: Z60 Canonical CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+
+  canonical-validation:
+
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show PowerShell version
+        shell: pwsh
+        run: |
+          $PSVersionTable.PSVersion
+
+      - name: Verify repository structure
+        shell: pwsh
+        run: |
+
+          $required = @(
+            "Core/Z60_Core.ps1",
+            "Validation/Run-CanonicalValidation.ps1",
+            "Theory/THEORY_NOTE.md",
+            "README.md",
+            "LICENSE",
+            "VERSION.txt",
+            "SPECIFICATION.md"
+          )
+
+          foreach ($file in $required) {
+            if (!(Test-Path $file)) {
+              throw "Missing required file: $file"
+            }
+          }
+
+          Write-Host "[OK] Repository structure verified"
+
+      - name: Run canonical validation
+        shell: pwsh
+        run: |
+          ./Core/Z60_Core.ps1
+          ./Validation/Run-CanonicalValidation.ps1
+
+      - name: Verify generated artifacts
+        shell: pwsh
+        run: |
+
+          $artifacts = @(
+            "Validation/Figures/z60_graph_validation.csv",
+            "Validation/Figures/z60_edges.csv",
+            "Validation/Figures/z60_basins.csv",
+            "Validation/Figures/z60_graph_validation.md"
+          )
+
+          foreach ($file in $artifacts) {
+            if (!(Test-Path $file)) {
+              throw "Missing validation artifact: $file"
+            }
+          }
+
+          Write-Host "[OK] Validation artifacts verified"
+
+      - name: Verify canonical idempotents
+        shell: pwsh
+        run: |
+
+          $expected = @(
+            "0",
+            "1",
+            "16",
+            "21",
+            "25",
+            "36",
+            "40",
+            "45"
+          )
+
+          $output = Get-Content "./Validation/Figures/z60_graph_validation.md" -Raw
+
+          foreach ($idempotent in $expected) {
+
+            if ($output -notmatch "\b$idempotent\b") {
+              throw "Missing canonical idempotent: $idempotent"
+            }
+
+          }
+
+          Write-Host "[OK] Canonical idempotents verified"
+
+      - name: Validate semantic version
+        shell: pwsh
+        run: |
+
+          if (!(Test-Path "VERSION.txt")) {
+            throw "VERSION.txt not found"
+          }
+
+          $version = (Get-Content VERSION.txt).Trim()
+
+          if ($version -notmatch '^v\d+\.\d+\.\d+$') {
+            throw "Invalid semantic version format: $version"
+          }
+
+          if (!(Test-Path "Z60/spec/SEMVER_CONTRACT.md")) {
+            throw "Missing semantic version contract"
+          }
+
+          Write-Host "[OK] Semantic version verified: $version"
+
+      - name: CI completed
+        shell: pwsh
+        run: |
+          Write-Host ""
+          Write-Host "Z60 canonical validation completed successfully"

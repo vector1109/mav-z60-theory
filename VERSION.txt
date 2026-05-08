@@ -1,1 +1,7 @@
 v1.0.0
+
+MAJOR.MINOR.PATCH
+
+MAJOR → changes in Φ, tensor, or core algebra
+MINOR → API extension
+PATCH → validation fixes only
