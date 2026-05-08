@@ -1,185 +1,104 @@
-# Z60 Tensor Schema Specification
-## Version 1.0.0
+# Z60 — Tensor Schema Specification
+
+Version: v1.0.0
+
+This document defines the canonical tensor structure of the Z60 runtime.
 
 ---
 
-# 1. Purpose
+# 1. Tensor Definition
 
-This document defines the canonical tensor structure used by the Z60 runtime.
+The canonical multiplication tensor is defined by:
 
-The tensor layer provides:
+$$
+T(a,b) = (a \cdot b) \bmod 60
+$$
 
-- deterministic modular state representation,
-- orbit encoding,
-- graph projection structures,
-- reproducible algebraic tensor operations.
+with:
 
-This schema is considered part of the frozen runtime contract.
+$$
+a,b \in \mathbb{Z}_{60}
+$$
 
----
+The tensor is represented as a complete lookup structure over:
 
-# 2. Canonical Tensor Definition
-
-A Z60 tensor is defined as a finite discrete tensor over:
-
-\[
-\mathbb{Z}_{60}
-\]
-
-with canonical integer domain:
-
-\[
-T : I_1 \times I_2 \times \dots \times I_n \to \mathbb{Z}_{60}
-\]
-
-where all tensor values satisfy:
-
-\[
-0 \le T[i] < 60
-\]
+$$
+\mathbb{Z}_{60} \times \mathbb{Z}_{60}
+$$
 
 ---
 
-# 3. Tensor Constraints
+# 2. Tensor Dimensions
 
-All canonical tensors must satisfy:
+The canonical tensor dimensions are:
 
-- integer-only storage,
-- deterministic ordering,
-- fixed dimensional interpretation,
-- modulo-60 normalization.
+```text id="jlwm4d"
+60 × 60
 
----
+Total entries:
 
-# 4. Canonical Tensor Types
+3600
+3. Canonical Ordering
 
-## 4.1 Orbit Tensor
+Tensor ordering is row-major:
 
-Represents iterative trajectories:
+(a,b)↦60a+b
 
-\[
-(x, x^2, x^4, x^8, \dots)
-\]
+Binary LUT index:
 
-Shape:
+index = (a * 60) + b
+4. Canonical Binary Encoding
 
-```text
-[length]
+The canonical LUT binary representation is:
 
-Example:
+unsigned byte array
 
-[7,49,1]
-4.2 Graph Tensor
+Each entry stores:
 
-Represents the functional graph mapping:
+(a⋅b)mod60
 
-x↦x
-2
-mod60
+using one byte per entry.
 
-Canonical shape:
+Canonical file:
 
-[60]
+Z60/Data/LUT/z60_multiply_lut.bin
+5. Determinism Requirements
 
-where:
-
-graph[x] = f(x)
-4.3 Basin Tensor
-
-Represents basin partition structure.
-
-Canonical shape:
-
-[60]
-
-where:
-
-basin[x] = Φ(x)
-5. Tensor Ordering
-
-Canonical ordering is:
-
-row-major
-
-for all exported tensor structures.
-
-This ordering is frozen for reproducibility.
-
-6. Tensor Normalization
-
-All tensor operations must apply:
-
-xmod60
-
-after every multiplicative operation.
-
-No overflow-dependent behavior is permitted.
-
-7. Serialization Contract
-
-Canonical serialization formats:
-
-CSV
-JSON
-binary LUT (future)
-tensor snapshot exports
-
-All serialized tensors must preserve:
-
-deterministic ordering,
-exact integer values,
-stable dimensional structure.
-8. Runtime Stability
-
-The following are frozen:
-
-tensor dimensional semantics,
-tensor ordering,
-modulo normalization,
-orbit encoding semantics.
-
-Changing any of these requires:
-
-MAJOR version increment
-
-under the SemVer contract.
-
-9. Cross-Language Consistency
-
-All implementations must produce identical tensor outputs across:
-
-PowerShell
-Python
-C++
-future runtimes
-
-for identical inputs.
-
-10. Deterministic Requirement
-
-Tensor generation must be:
+The tensor must be:
 
 deterministic,
 reproducible,
-platform-independent.
+platform-independent,
+ordering-stable,
+hash-stable.
+6. Frozen Structural Properties
 
-No randomness is permitted in canonical tensor exports.
+The following properties are frozen:
 
-11. Canonical Runtime Role
+tensor dimensions,
+row-major ordering,
+binary encoding,
+modular multiplication semantics,
+deterministic export structure.
+7. Validation Requirements
 
-The tensor layer is the computational representation of:
+The tensor must pass:
 
-multiplicative dynamics,
-graph topology,
-orbit evolution,
-idempotent projection.
+LUT integrity validation,
+canonical hash verification,
+algebraic consistency checks,
+API compatibility tests.
+8. Breaking Changes
 
-It forms the executable algebraic substrate of the Z60 runtime.
+The following changes require MAJOR version increment:
 
-12. Freeze Status
+tensor dimension changes,
+ordering changes,
+binary encoding changes,
+algebraic semantic changes,
+deterministic export changes.
+9. Runtime Role
 
-Status:
+The tensor constitutes the canonical algebraic memory layer of the Z60 runtime.
 
-FROZEN — v1.0.0
-
-This schema is now part of the canonical runtime specification.
+All higher dynamical operators derive from this tensor structure.
