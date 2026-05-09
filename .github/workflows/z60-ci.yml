@@ -2,7 +2,9 @@ name: Z60 Canonical CI
 
 on:
   push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -13,12 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup PowerShell
-        uses: PowerShell/PowerShell@v1
-
       - name: Run canonical validation
         shell: pwsh
         run: |
+          # Se ejecutan los scripts del núcleo y la validación
           ./Core/Z60_Core.ps1
           ./Validation/Run-CanonicalValidation.ps1
 
@@ -36,22 +36,20 @@ jobs:
             if (!(Test-Path $File)) {
               throw "Missing artifact: $File"
             }
-
             Write-Host "[OK] $File"
           }
 
       - name: Verify canonical idempotents
         shell: pwsh
         run: |
-          $Expected = "0, 1, 16, 21, 25, 36, 40, 45"
-
+          # Definición de idempotentes del sistema Z60
+          $ExpectedRegex = "0, 1, 16, 21, 25, 36, 40, 45"
           $Content = Get-Content "./Validation/Figures/z60_graph_validation.md" -Raw
 
-          if ($Content -notmatch "0, 1, 16, 21, 25, 36, 40, 45") {
-            throw "Canonical idempotents mismatch"
+          if ($Content -notmatch $ExpectedRegex) {
+            throw "Canonical idempotents mismatch in validation summary"
           }
-
-          Write-Host "[OK] Canonical idempotents verified"
+          Write-Host "[OK] Canonical idempotents verified: $ExpectedRegex"
 
       - name: Verify VERSION
         shell: pwsh
@@ -59,14 +57,11 @@ jobs:
           if (!(Test-Path "./VERSION.txt")) {
             throw "VERSION.txt missing"
           }
-
-          $Version = Get-Content "./VERSION.txt"
-
+          $Version = Get-Content "./VERSION.txt" -Raw
           if ([string]::IsNullOrWhiteSpace($Version)) {
-            throw "VERSION.txt empty"
+            throw "VERSION.txt is empty"
           }
-
-          Write-Host "[OK] VERSION = $Version"
+          Write-Host "[OK] VERSION = $($Version.Trim())"
 
       - name: Verify freeze specifications
         shell: pwsh
@@ -80,7 +75,6 @@ jobs:
             if (!(Test-Path $Spec)) {
               throw "Missing specification: $Spec"
             }
-
             Write-Host "[OK] $Spec"
           }
 
@@ -88,4 +82,6 @@ jobs:
         shell: pwsh
         run: |
           Write-Host ""
+          Write-Host "-------------------------------------------"
           Write-Host "[SYSTEM STATUS] CANONICAL VALIDATION PASSED"
+          Write-Host "-------------------------------------------"
